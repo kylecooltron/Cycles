@@ -47,3 +47,30 @@ Kyle Coulon (kylejcoulon@gmail.com)
 
 
 ```
+
+MAIN CLASS
+
+- create two snakes
+
+CONTROL ACTORS ACTIONS CLASS
+
+- use cast groups to make sure keyboard controls apply to each ("snake 1" vs "snake 2")
+
+SNAKE CLASS:
+
+- using "\_player" variable inside snake class make sure they start at correct positions in \_prepare_body method
+
+GROWTH (child of Action) - CLASS TO INSCREASE SIZE OF SNAKES
+
+- created in Main class
+- needs access to Cast so that it can access snake1 and 2 in order to call their grow_tail() method
+- execute method () add that to do updates script
+- in execute method, somehow use timer variable (for instance multiplies seconds by frame rate constant) to count certain number of frames that calls grow tail on snakes
+
+HANDLE COLLISIONS CLASS:
+
+- using cast group name "snake 1" vs "snake 2", check each segment against each other to find collision, if true call game_over()
+- game over() needs to turn both snakes white, display game over message
+- if we want self collision, make method that checks each snake against its own segments
+
+ALL OTHER CLASSES SHOULD BE SIMILAR TO THE PREPARE GAME SOURCE
