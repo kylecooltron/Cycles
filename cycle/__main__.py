@@ -33,7 +33,7 @@ def main():
     script.add_action("input", ControlActorsAction(keyboard_service))
     script.add_action("update", MoveActorsAction())
     script.add_action("update", HandleCollisionsAction())
-    script.add_action("update", HandleGrowth())
+    #script.add_action("update", HandleGrowth())
     script.add_action("output", DrawActorsAction(video_service))
 
     director = Director(video_service)

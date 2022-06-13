@@ -48,17 +48,21 @@ Kyle Coulon (kylejcoulon@gmail.com)
 
 ```
 
+# Peter
+
 MAIN CLASS
 
 - create two snakes
+
+SNAKE CLASS:
+
+- using "player" variable inside snake class make sure they start at correct positions in prepare_body method
 
 CONTROL ACTORS ACTIONS CLASS
 
 - use cast groups to make sure keyboard controls apply to each ("snake 1" vs "snake 2")
 
-SNAKE CLASS:
-
-- using "\_player" variable inside snake class make sure they start at correct positions in \_prepare_body method
+# ?
 
 GROWTH (child of Action) - CLASS TO INSCREASE SIZE OF SNAKES
 
@@ -67,7 +71,9 @@ GROWTH (child of Action) - CLASS TO INSCREASE SIZE OF SNAKES
 - execute method () add that to do updates script
 - in execute method, somehow use timer variable (for instance multiplies seconds by frame rate constant) to count certain number of frames that calls grow tail on snakes
 
-HANDLE COLLISIONS CLASS:
+# Kyle
+
+HANDLE COLLISIONS CLASS: (Kyle)
 
 - using cast group name "snake 1" vs "snake 2", check each segment against each other to find collision, if true call game_over()
 - game over() needs to turn both snakes white, display game over message
