@@ -19,6 +19,9 @@ class Snake(Actor):
         self._player = player
         self._prepare_body(self._player)
 
+    def get_player(self):
+        return self._player
+
     def get_segments(self):
         return self._segments
 
