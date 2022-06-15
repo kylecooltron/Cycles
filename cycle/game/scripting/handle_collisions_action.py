@@ -52,6 +52,7 @@ class HandleCollisionsAction(Action):
                         if head.get_position().equals(segment.get_position()):
                             # if head collides with any, game over
                             self._is_game_over = True
+                            # assign winner to the other player
                             self._who_won = other.get_player()
 
     def _handle_segment_collision(self, cast):
@@ -67,6 +68,12 @@ class HandleCollisionsAction(Action):
 
             for segment in segments:
                 if head.get_position().equals(segment.get_position()):
+                    # if snake hit itself, the other player wins
+                    if snake.get_player() == "first":
+                        self._who_won = "second"
+                    else:
+                        self._who_won = "first"
+                    # end game
                     self._is_game_over = True
 
     def _handle_game_over(self, cast):
