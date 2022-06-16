@@ -57,7 +57,7 @@ class Snake(Actor):
                 segment.set_position(position)
                 segment.set_velocity(velocity)
                 segment.set_text("%")
-                segment.set_color(constants.YELLOW)
+                segment.set_color(constants.RED)
 
             self._segments.append(segment)
 
@@ -73,7 +73,7 @@ class Snake(Actor):
                 position = Point(x - i * constants.CELL_SIZE, y)
                 velocity = Point(1 * constants.CELL_SIZE, 0)
                 text = "8" if i == 0 else "#"
-                color = constants.YELLOW if i == 0 else constants.GREEN
+                color = constants.BROWN if i == 0 else constants.GREEN
                 segment = Actor()
                 segment.set_position(position)
                 segment.set_velocity(velocity)
@@ -87,7 +87,7 @@ class Snake(Actor):
                 position = Point(x - i * constants.CELL_SIZE, y)
                 velocity = Point(1 * constants.CELL_SIZE, 0)
                 #velocity = (0, 30)
-                text = "8" if i == 0 else "%"
+                text = "$" if i == 0 else "%"
                 color = constants.YELLOW if i == 0 else constants.RED
                 segment = Actor()
                 segment.set_position(position)
