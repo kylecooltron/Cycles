@@ -32,6 +32,23 @@ class HandleCollisionsAction(Action):
             self._handle_segment_collision(cast)
             self._handle_game_over(cast)
 
+    def _return_player_color(self, value, reverse=False):
+        """Returns the color of the snake that won
+
+        Args:
+            cast (Cast): The cast of Actors in the game.
+            value (string): either "first" or "second" so we know which player won
+            reverse (bool): default is False. Returns the opposite players color when True
+        """
+        color_list = ["Green", "Red"]
+        if value == "first":
+            color = 0
+        else:
+            color = 1
+        if reverse:
+            color = 1 - color
+        return color_list[color]
+
     def _handle_snakes_collision(self, cast):
         """Sets the game over flag if a snake head collides with a segment from another snake.
 
@@ -46,14 +63,15 @@ class HandleCollisionsAction(Action):
             # loop through every other snake
             for other in snakes:
                 # make sure its not ourselves
-                if snake != other:
+                if other != snake:
                     for segment in other.get_segments():
                         # for every segment in this other snake
                         if head.get_position().equals(segment.get_position()):
                             # if head collides with any, game over
                             self._is_game_over = True
                             # assign winner to the other player
-                            self._who_won = other.get_player()
+                            self._who_won = self._return_player_color(
+                                other.get_player())
 
     def _handle_segment_collision(self, cast):
         """Sets the game over flag if the snake collides with one of its segments.
@@ -69,10 +87,8 @@ class HandleCollisionsAction(Action):
             for segment in segments:
                 if head.get_position().equals(segment.get_position()):
                     # if snake hit itself, the other player wins
-                    if snake.get_player() == "first":
-                        self._who_won = "second"
-                    else:
-                        self._who_won = "first"
+                    self._who_won = self._return_player_color(
+                        snake.get_player(), True)
                     # end game
                     self._is_game_over = True
 
