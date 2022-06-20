@@ -31,45 +31,57 @@ class ControlActorsAction(Action):
             script (Script): The script of Actions in the game.
         """
         # Player 1 controls
+        p1_key_pressed = False
 
         # left
         if self._keyboard_service.is_key_down('a'):
             self._first_player_direction = Point(-constants.CELL_SIZE, 0)
+            p1_key_pressed = True
 
         # right
         if self._keyboard_service.is_key_down('d'):
             self._first_player_direction = Point(constants.CELL_SIZE, 0)
+            p1_key_pressed = True
 
         # up
         if self._keyboard_service.is_key_down('w'):
             self._first_player_direction = Point(0, -constants.CELL_SIZE)
+            p1_key_pressed = True
 
         # down
         if self._keyboard_service.is_key_down('s'):
             self._first_player_direction = Point(0, constants.CELL_SIZE)
+            p1_key_pressed = True
 
         # player 2 controls
+        p2_key_pressed = False
 
         # left
         if self._keyboard_service.is_key_down('j'):
             self._second_player_direction = Point(-constants.CELL_SIZE, 0)
+            p2_key_pressed = True
 
         # right
         if self._keyboard_service.is_key_down('l'):
             self._second_player_direction = Point(constants.CELL_SIZE, 0)
+            p2_key_pressed = True
 
         # up
         if self._keyboard_service.is_key_down('i'):
             self._second_player_direction = Point(0, -constants.CELL_SIZE)
+            p2_key_pressed = True
 
         # down
         if self._keyboard_service.is_key_down('k'):
             self._second_player_direction = Point(0, constants.CELL_SIZE)
+            p2_key_pressed = True
 
         # apply directions
         snakes = cast.get_actors("snakes")
         for snake in snakes:
             if snake.get_player() == "first":
-                snake.turn_head(self._first_player_direction)
+                if p1_key_pressed:
+                    snake.turn_head(self._first_player_direction)
             if snake.get_player() == "second":
-                snake.turn_head(self._second_player_direction)
+                if p2_key_pressed:
+                    snake.turn_head(self._second_player_direction)

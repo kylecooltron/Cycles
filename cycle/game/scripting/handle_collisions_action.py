@@ -15,8 +15,11 @@ class HandleCollisionsAction(Action):
         _is_game_over (boolean): Whether or not the game is over.
     """
 
-    def __init__(self):
+    def __init__(self, keyboard_service):
         """Constructs a new HandleCollisionsAction."""
+
+        self._keyboard_service = keyboard_service
+
         self._is_game_over = False
         self._who_won = ""
 
@@ -31,6 +34,16 @@ class HandleCollisionsAction(Action):
             self._handle_snakes_collision(cast)
             self._handle_segment_collision(cast)
             self._handle_game_over(cast)
+        else:
+            if self._keyboard_service.is_key_down('y'):
+                # reset game over variable
+                self._is_game_over = False
+                # remove game over message
+                cast.remove_actor("messages", cast.get_first_actor("messages"))
+                # reset snake bodies
+                snakes = cast.get_actors("snakes")
+                for snake in snakes:
+                    snake._reset_body()
 
     def _return_player_color(self, value, reverse=False):
         """Returns the color of the snake that won
@@ -108,12 +121,14 @@ class HandleCollisionsAction(Action):
 
             message = Actor()
             message.set_text(
-                f"Game Over!\n {self._who_won.capitalize()} player won the game.")
+                f"Game Over!\n {self._who_won.capitalize()} player won the game.\n\n Press 'Y' to play again! ")
             message.set_position(position)
             cast.add_actor("messages", message)
 
             # turn all segments of all snakes white
             for snake in snakes:
                 segments = snake.get_segments()
-                for segment in segments:
-                    segment.set_color(constants.WHITE)
+                for index, segment in enumerate(segments):
+                    # leave one colored spot to identify which is which
+                    if index != 1:
+                        segment.set_color(constants.WHITE)
