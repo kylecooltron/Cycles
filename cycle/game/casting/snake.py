@@ -64,6 +64,10 @@ class Snake(Actor):
     def turn_head(self, velocity):
         self._segments[0].set_velocity(velocity)
 
+    def _reset_body(self):
+        self._segments.clear()
+        self._prepare_body(self._player)
+
     def _prepare_body(self, player):
 
         if player == "first":
