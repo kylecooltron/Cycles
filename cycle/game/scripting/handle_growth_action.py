@@ -19,6 +19,7 @@ class HandleGrowthAction(Action):
             self._timer keeps track of when to grow snakes tails.
         """
         self._timer = 0
+        self._wait_time = 100
 
     def execute(self, cast, script):
         """Executes the handle growth action.
@@ -29,3 +30,13 @@ class HandleGrowthAction(Action):
         """
         # this is executed every frame during do updates phase of game loop
         # run timer and every once and a while add tails to snakes
+
+        self._timer += 1
+
+        if self._timer > self._wait_time:
+        
+            snakes = cast.get_actors("snakes")
+            snakes.grow_tail(1)
+
+            self._wait_time -= 1
+            self._timer = 0
