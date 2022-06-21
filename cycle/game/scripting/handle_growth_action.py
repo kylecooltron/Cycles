@@ -17,6 +17,7 @@ class HandleGrowthAction(Action):
 
         Args:
             self._timer keeps track of when to grow snakes tails.
+            self._wait_time determines the time interval for snake growth
         """
         self._timer = 0
         self._wait_time = 100
@@ -36,7 +37,11 @@ class HandleGrowthAction(Action):
         if self._timer > self._wait_time:
         
             snakes = cast.get_actors("snakes")
-            snakes.grow_tail(1)
+            
+            for snake in snakes:
+
+                snake.grow_tail(1)
 
             self._wait_time -= 1
             self._timer = 0
+        
