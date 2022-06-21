@@ -35,11 +35,9 @@ class HandleGrowthAction(Action):
         self._timer += 1
 
         if self._timer > self._wait_time:
-        
             snakes = cast.get_actors("snakes")
             
             for snake in snakes:
-
                 snake.grow_tail(1)
 
             self._wait_time -= 1
