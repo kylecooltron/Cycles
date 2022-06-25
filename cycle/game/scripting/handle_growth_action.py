@@ -20,7 +20,7 @@ class HandleGrowthAction(Action):
             self._wait_time determines the time interval for snake growth
         """
         self._timer = 0
-        self._wait_time = 100
+        self._wait_time = constants.GROW_TAIL_WAIT
 
     def execute(self, cast, script):
         """Executes the handle growth action.
@@ -32,14 +32,28 @@ class HandleGrowthAction(Action):
         # this is executed every frame during do updates phase of game loop
         # run timer and every once and a while add tails to snakes
 
-        self._timer += 1
+        snakes = cast.get_actors("snakes")
 
-        if self._timer > self._wait_time:
-            snakes = cast.get_actors("snakes")
-            
-            for snake in snakes:
-                snake.grow_tail(1)
+        if(snakes[0].get_is_dead() == True):
 
-            self._wait_time -= 1
-            self._timer = 0
-        
+            # if the snakes are dead, reset the wait time
+            self._wait_time = constants.GROW_TAIL_WAIT
+
+        else:
+
+            # count each step
+            self._timer += 1
+
+            # when wait time is reached
+            if self._timer > self._wait_time:
+
+                # reset count
+                self._timer = 0
+
+                #  grow tails
+                for snake in snakes:
+                    snake.grow_tail(1)
+
+                # make the wait times faster over time, but not less than 20
+                if self._wait_time > 20:
+                    self._wait_time -= 1

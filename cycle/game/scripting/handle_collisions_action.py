@@ -127,8 +127,19 @@ class HandleCollisionsAction(Action):
 
             # turn all segments of all snakes white
             for snake in snakes:
+                # set snake is dead to true
+                snake.set_is_dead(True)
                 segments = snake.get_segments()
+
                 for index, segment in enumerate(segments):
                     # leave one colored spot to identify which is which
                     if index != 1:
                         segment.set_color(constants.WHITE)
+
+            # add point to correct score
+            scores = cast.get_actors("scores")
+            for score in scores:
+                if self._who_won == "Green" and score.get_player() == "first":
+                    score.add_points(1)
+                if self._who_won == "Red" and score.get_player() == "second":
+                    score.add_points(1)

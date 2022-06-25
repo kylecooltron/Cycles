@@ -22,7 +22,9 @@ def main():
     cast = Cast()
     cast.add_actor("snakes", Snake("first"))
     cast.add_actor("snakes", Snake("second"))
-    cast.add_actor("scores", Score())
+
+    cast.add_actor("scores", Score("first"))
+    cast.add_actor("scores", Score("second"))
 
     # start the game
     keyboard_service = KeyboardService()

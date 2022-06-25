@@ -18,12 +18,19 @@ class Snake(Actor):
         self._segments = []
         self._player = player
         self._prepare_body(self._player)
+        self._is_dead = False
 
     def get_player(self):
         return self._player
 
     def get_segments(self):
         return self._segments
+
+    def get_is_dead(self):
+        return self._is_dead
+
+    def set_is_dead(self, is_dead):
+        self._is_dead = is_dead
 
     def move_next(self):
         # move all segments
@@ -65,6 +72,7 @@ class Snake(Actor):
         self._segments[0].set_velocity(velocity)
 
     def _reset_body(self):
+        self._is_dead = False
         self._segments.clear()
         self._prepare_body(self._player)
 
