@@ -77,11 +77,11 @@ class ControlActorsAction(Action):
             p2_key_pressed = True
 
         # apply directions
-        snakes = cast.get_actors("snakes")
-        for snake in snakes:
-            if snake.get_player() == "first":
+        cycles = cast.get_actors("cycles")
+        for cycle in cycles:
+            if cycle.get_player() == "first":
                 if p1_key_pressed:
-                    snake.turn_head(self._first_player_direction)
-            if snake.get_player() == "second":
+                    cycle.turn_head(self._first_player_direction)
+            if cycle.get_player() == "second":
                 if p2_key_pressed:
-                    snake.turn_head(self._second_player_direction)
+                    cycle.turn_head(self._second_player_direction)

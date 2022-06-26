@@ -27,11 +27,11 @@ class DrawActorsAction(Action):
             script (Script): The script of Actions in the game.
         """
 
-        # get snake segments
-        snakes = cast.get_actors("snakes")
+        # get cycle segments
+        cycles = cast.get_actors("cycles")
         segments = []
-        for snake in snakes:
-            segments += snake.get_segments()
+        for cycle in cycles:
+            segments += cycle.get_segments()
         # get score and messages
         score = cast.get_actors("scores")
         messages = cast.get_actors("messages")

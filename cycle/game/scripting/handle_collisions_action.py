@@ -8,8 +8,8 @@ class HandleCollisionsAction(Action):
     """
     An update action that handles interactions between the actors.
 
-    The responsibility of HandleCollisionsAction is to handle the situation when the snake collides
-    with the food, or the snake collides with its segments, or the game is over.
+    The responsibility of HandleCollisionsAction is to handle the situation when the cycle collides
+    with the food, or the cycle collides with its segments, or the game is over.
 
     Attributes:
         _is_game_over (boolean): Whether or not the game is over.
@@ -31,7 +31,7 @@ class HandleCollisionsAction(Action):
             script (Script): The script of Actions in the game.
         """
         if not self._is_game_over:
-            self._handle_snakes_collision(cast)
+            self._handle_cycles_collision(cast)
             self._handle_segment_collision(cast)
             self._handle_game_over(cast)
         else:
@@ -40,13 +40,13 @@ class HandleCollisionsAction(Action):
                 self._is_game_over = False
                 # remove game over message
                 cast.remove_actor("messages", cast.get_first_actor("messages"))
-                # reset snake bodies
-                snakes = cast.get_actors("snakes")
-                for snake in snakes:
-                    snake._reset_body()
+                # reset cycle bodies
+                cycles = cast.get_actors("cycles")
+                for cycle in cycles:
+                    cycle._reset_body()
 
     def _return_player_color(self, value, reverse=False):
-        """Returns the color of the snake that won
+        """Returns the color of the cycle that won
 
         Args:
             cast (Cast): The cast of Actors in the game.
@@ -62,23 +62,23 @@ class HandleCollisionsAction(Action):
             color = 1 - color
         return color_list[color]
 
-    def _handle_snakes_collision(self, cast):
-        """Sets the game over flag if a snake head collides with a segment from another snake.
+    def _handle_cycles_collision(self, cast):
+        """Sets the game over flag if a cycle head collides with a segment from another cycle.
 
         Args:
             cast (Cast): The cast of Actors in the game.
         """
-        snakes = cast.get_actors("snakes")
+        cycles = cast.get_actors("cycles")
 
-        # for every snake
-        for snake in snakes:
-            head = snake.get_segments()[0]
-            # loop through every other snake
-            for other in snakes:
+        # for every cycle
+        for cycle in cycles:
+            head = cycle.get_segments()[0]
+            # loop through every other cycle
+            for other in cycles:
                 # make sure its not ourselves
-                if other != snake:
+                if other != cycle:
                     for segment in other.get_segments():
-                        # for every segment in this other snake
+                        # for every segment in this other cycle
                         if head.get_position().equals(segment.get_position()):
                             # if head collides with any, game over
                             self._is_game_over = True
@@ -87,33 +87,33 @@ class HandleCollisionsAction(Action):
                                 other.get_player())
 
     def _handle_segment_collision(self, cast):
-        """Sets the game over flag if the snake collides with one of its segments.
+        """Sets the game over flag if the cycle collides with one of its segments.
 
         Args:
             cast (Cast): The cast of Actors in the game.
         """
-        snakes = cast.get_actors("snakes")
-        for snake in snakes:
-            head = snake.get_segments()[0]
-            segments = snake.get_segments()[1:]
+        cycles = cast.get_actors("cycles")
+        for cycle in cycles:
+            head = cycle.get_segments()[0]
+            segments = cycle.get_segments()[1:]
 
             for segment in segments:
                 if head.get_position().equals(segment.get_position()):
-                    # if snake hit itself, the other player wins
+                    # if cycle hit itself, the other player wins
                     self._who_won = self._return_player_color(
-                        snake.get_player(), True)
+                        cycle.get_player(), True)
                     # end game
                     self._is_game_over = True
 
     def _handle_game_over(self, cast):
-        """Shows the 'game over' message and turns the snake and food white if the game is over.
+        """Shows the 'game over' message and turns the cycle white if the game is over.
 
         Args:
             cast (Cast): The cast of Actors in the game.
         """
         if self._is_game_over:
 
-            snakes = cast.get_actors("snakes")
+            cycles = cast.get_actors("cycles")
 
             x = int(constants.MAX_X / 2)
             y = int(constants.MAX_Y / 2)
@@ -125,11 +125,11 @@ class HandleCollisionsAction(Action):
             message.set_position(position)
             cast.add_actor("messages", message)
 
-            # turn all segments of all snakes white
-            for snake in snakes:
-                # set snake is dead to true
-                snake.set_is_dead(True)
-                segments = snake.get_segments()
+            # turn all segments of all cycles white
+            for cycle in cycles:
+                # set cycle is dead to true
+                cycle.set_is_dead(True)
+                segments = cycle.get_segments()
 
                 for index, segment in enumerate(segments):
                     # leave one colored spot to identify which is which
