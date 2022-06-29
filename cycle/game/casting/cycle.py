@@ -5,12 +5,14 @@ from game.shared.point import Point
 
 class Cycle(Actor):
     """
-    A long limbless reptile.
+    A cycle leaving a trail behind it.
 
     The responsibility of Cycle is to move itself.
 
     Attributes:
-        _points (int): The number of points the food is worth.
+        _segments (list): A list of actors forming the body
+        _player (string): A string that identifies whether the player is "first" or "second"
+        _is_dead (bool): Keeps track of the state of the cycle
     """
 
     def __init__(self, player):
