@@ -18,6 +18,8 @@ class ControlActorsAction(Action):
 
         Args:
             keyboard_service (KeyboardService): An instance of KeyboardService.
+            _first_player_direction (Point): An instance of Point that controls the first players direction
+            _second_player_direction (Point): An instance of Point that controls the second players direction
         """
         self._keyboard_service = keyboard_service
         self._first_player_direction = Point(0, -constants.CELL_SIZE)

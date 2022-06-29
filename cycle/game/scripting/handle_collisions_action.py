@@ -8,11 +8,12 @@ class HandleCollisionsAction(Action):
     """
     An update action that handles interactions between the actors.
 
-    The responsibility of HandleCollisionsAction is to handle the situation when the cycle collides
-    with the food, or the cycle collides with its segments, or the game is over.
+    The responsibility of HandleCollisionsAction is to handle the situation when a cycle collides
+    with the other cycle, or the cycle collides with its segments, or the game is over.
 
     Attributes:
         _is_game_over (boolean): Whether or not the game is over.
+        _who_won (string): Keeps track of who won the round to display as text "Red" or "Green"
     """
 
     def __init__(self, keyboard_service):
