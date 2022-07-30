@@ -1,6 +1,6 @@
-# cycle
+# Cycles
 
-Cycle is a game where the players try to cut each other off using cycles that leave a trail behind them. You play this game
+Cycles is a game where the players try to cut each other off using cycles that leave a trail behind them. You play this game
 on a simulated terminal, with a textual interface.
 
 ## Getting Started
