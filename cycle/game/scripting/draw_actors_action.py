@@ -35,7 +35,7 @@ class DrawActorsAction(Action):
         # get score and messages
         score = cast.get_actors("scores")
         messages = cast.get_actors("messages")
-        # draw
+        # draw actors
         self._video_service.clear_buffer()
         self._video_service.draw_actors(segments)
         self._video_service.draw_actors(score)

@@ -39,18 +39,14 @@ root (project root folder)
 * Python 3.8.0
 * Raylib Python CFFI 3.7
 
-## Authors
+## Author
 ---
 Kyle Coulon (kylejcoulon@gmail.com)
-* TODO: Add your name and email here
-
 
 
 ```
 
 DESIGN DOCUMENT:
-
-# Peter
 
 MAIN CLASS
 
@@ -62,8 +58,6 @@ SNAKE CLASS:
 - make sure snakes start at correct positions in prepare_body method
 - color both snakes differently
 
-# Rachel
-
 Create a class to increase the size of snakes
 
 HandleGrowthAction (child of Action)
@@ -73,8 +67,6 @@ HandleGrowthAction (child of Action)
 - override execute method
 - in execute method, use a timer variable (for instance multiplies seconds by frame rate constant) to count certain number of frames
 - then calls grow_tail on snakes and resets timer
-
-# Kyle
 
 CONTROL ACTORS ACTIONS CLASS
 
@@ -97,13 +89,3 @@ GAME RESTART
 - if player chooses y, call a method on both instances of Snake that resets their positions and colors
 - set game over variable to false
 - destroy Actors that display game over messages
-
-# Alex
-
-SCORES(child of Actor)
-
-- child of actor, only difference is it keeps track of a score number variable
-- create two instances of Scores class at the beginning of the game
-- update each score when a player wins (HandleCollisionsAction class)
-
-ALL OTHER CLASSES SHOULD BE SIMILAR TO THE PREPARE GAME SOURCE

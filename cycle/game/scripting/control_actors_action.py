@@ -80,10 +80,13 @@ class ControlActorsAction(Action):
 
         # apply directions
         cycles = cast.get_actors("cycles")
+
         for cycle in cycles:
+            # apply first players movement
             if cycle.get_player() == "first":
                 if p1_key_pressed:
                     cycle.turn_head(self._first_player_direction)
+            # aply second players movement
             if cycle.get_player() == "second":
                 if p2_key_pressed:
                     cycle.turn_head(self._second_player_direction)

@@ -97,7 +97,7 @@ class HandleCollisionsAction(Action):
         for cycle in cycles:
             head = cycle.get_segments()[0]
             segments = cycle.get_segments()[1:]
-
+            # check each cycles head against it's own segments
             for segment in segments:
                 if head.get_position().equals(segment.get_position()):
                     # if cycle hit itself, the other player wins
@@ -114,12 +114,14 @@ class HandleCollisionsAction(Action):
         """
         if self._is_game_over:
 
+            # get reference to cycles
             cycles = cast.get_actors("cycles")
 
+            # find a position in the center of the screen
             x = int(constants.MAX_X / 2)
             y = int(constants.MAX_Y / 2)
             position = Point(x, y)
-
+            # create a game over message there
             message = Actor()
             message.set_text(
                 f"Game Over!\n {self._who_won.capitalize()} player won the game.\n\n Press 'Y' to play again! ")
@@ -131,7 +133,6 @@ class HandleCollisionsAction(Action):
                 # set cycle is dead to true
                 cycle.set_is_dead(True)
                 segments = cycle.get_segments()
-
                 for index, segment in enumerate(segments):
                     # leave one colored spot to identify which is which
                     if index != 1:

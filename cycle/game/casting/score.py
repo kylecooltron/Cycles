@@ -48,7 +48,9 @@ class Score(Actor):
         """
         self._points += points
 
+        # check to see which player this score belongs to so we display it correctly
         if self._player == "first":
             self.set_text(f"Green Score: {self._points}")
+
         if self._player == "second":
             self.set_text(f"Red Score: {self._points}")
